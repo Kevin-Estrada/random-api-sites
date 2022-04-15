@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alcohol Drink Generator</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/e5c7057feb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- This is the navbar-->
+      <nav class="navbar">
+        <div class="logo_header">
+          <a href="./index.html" class="logo"
+            ><img class="img-logo" src="./assets/api-image-logo.jpg" /><span
+              >API HUB</span
+            ></a
+          >
+          <button class="navbar_toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <ul class="main_nav">
+          <li>
+            <a href="../index.html" class="nav_links">Home</a>
+          </li>
+          <li>
+            <a href="../anime-quotes/index.html" class="nav_links"
+              >Anime Quote Generator</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <main>
+        <!-- This is the end of navbar-->
+        <h1 class="site-name">Alcohol Drink Generator</h1>
+        <p class="intro-text">
+          Hey Everyone! Welcome to the alcohol drink generator site. Use the
+          bottom dropdown to either choose a random drink or if you are feeling
+          indecisive about a certain liquor, then choose a liquor and it will
+          generate a random drink within that category. Just to give some nerd
+          description for those interested, this utilizes a free alcohol API
+          that retrives all the details about the drink based on a category
+          chosen from the drop down.
+        </p>
+
+        <section class="form-container">
+          <label for="drinks">Choose a drink:</label>
+
+          <select class="dropdown" name="drinks" id="drinks">
+            <option value="random-drink">Random Drink</option>
+            <option value="Rum">Rum</option>
+            <option value="Gin">Gin</option>
+            <option value="Tequila">Tequila</option>
+            <option value="Vodka">Vodka</option>
+            <option value="Brandy">Brandy</option>
+            <option value="Whiskey">Whiskey</option>
+            <option value="Liqueur">Liqueur</option>
+          </select>
+          <button class="generate-btn" type="button">Generate Drink</button>
+
+          <p class="description-box">This option will return a random drink!</p>
+        </section>
+
+        <section class="drink-info">
+          <p class="drink-notice"></p>
+          <h2 class="drink-name"></h2>
+          <img
+            class="drink-img"
+            src="./assets/alcohol-drinks.jpg"
+            alt="Picture of Drink"
+          />
+          <span class="drink-ingredients-header"></span>
+          <ul class="drink-ingredients"></ul>
+
+          <span class="drink-instructions-header"></span>
+          <p class="drink-instructions"></p>
+        </section>
+      </main>
+
+      <!--Start of the footer section-->
+      <footer>
+        <ul class="footer-section">
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="mailto: ke81297@gmail.com"
+            >
+              <i class="fa-solid fa-envelope"></i> Email</a
+            >
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="https://twitter.com/KevinEs812"
+              ><i class="fa-brands fa-twitter"></i> Twitter</a
+            >
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="https://www.linkedin.com/in/kevinestrada1213/"
+              ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
+            >
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="https://www.kevin-estrada.com"
+              ><i class="fa-solid fa-globe"></i> Portfolio</a
+            >
+          </li>
+        </ul>
+      </footer>
+      <!--End of the footer section-->
+    </div>
+
+    <script src="./js/index.js"></script>
+    <script src="./js/navbar.js"></script>
+  </body>
+</html>
