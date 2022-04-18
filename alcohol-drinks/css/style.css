@@ -122,7 +122,7 @@ label {
 }
 
 .dropdown {
-  background-color: #78a225;
+  background-color: #bfc6c3;
   text-align: center;
   border-radius: 25px;
   padding: 5px;
@@ -132,6 +132,8 @@ label {
 }
 
 .generate-btn {
+  background-color: #0022ff;
+  color: white;
   text-align: center;
   border-radius: 25px;
   padding: 5px;
@@ -158,6 +160,11 @@ section {
   margin: 0 auto;
 }
 
+.drink-notice {
+  margin-bottom: 3%;
+  font-style: italic;
+}
+
 .drink-name {
   font-style: italic;
 }
@@ -175,8 +182,28 @@ section {
 }
 
 .drink-img {
-  width: 75%;
+  width: 35%;
   height: auto;
+}
+
+.drink-ingredients-header {
+  margin-top: 2%;
+  margin-bottom: 1%;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+
+.drink-instructions-header {
+  margin-top: 2%;
+  margin-bottom: 1%;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+
+.drink-instructions {
+  width: 50%;
+  margin-bottom: 2%;
+  text-align: center;
 }
 /*****************END OF MAIN SECTION*****************/
 
@@ -259,5 +286,10 @@ section {
   .img-logo {
     width: 8%;
     margin-right: 2%;
+  }
+
+  .drink-img {
+    width: 80%;
+    height: auto;
   }
 }

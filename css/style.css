@@ -118,7 +118,7 @@ footer {
 .footer-section {
   background-color: #000000;
   display: flex;
-  /* height: 7vh; */
+  height: 7vh;
   justify-content: space-around;
   align-items: center;
   width: 100%;
