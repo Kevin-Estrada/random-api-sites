@@ -19,52 +19,96 @@
     ></script>
   </head>
   <body>
-    <nav>
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../alcohol-drinks/index.html">Alcohol Generator</a></li>
-      </ul>
-    </nav>
-    <h1>Anime Fact Generator</h1>
-    <h3>
-      Hey Everyone! Go ahead and click on the button below to generate an anime
-      fact!
-    </h3>
+    <div class="container">
+      <!-- This is the navbar-->
+      <nav class="navbar">
+        <div class="logo_header">
+          <a href="../index.html" class="logo"
+            ><img class="img-logo" src="./assets/api-image-logo.jpg" /><span
+              >API HUB</span
+            ></a
+          >
+          <button class="navbar_toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
 
-    <section>
-      <button onclick="runFunction()">Click Me!</button>
+        <ul class="main_nav">
+          <li>
+            <a href="../index.html" class="nav_links">Home</a>
+          </li>
+          <li>
+            <a href="../alcohol-drinks/index.html" class="nav_links"
+              >Alcohol Drink Generator</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <main>
+        <h1 class="site-name">Anime Fact Generator</h1>
+        <p class="intro-text">
+          Hey Everyone! Welcome to the random Anime Fact Generator. This pulls
+          random facts for a couple of animes! Go ahead and test your knowledge
+          and see if these facts can surprise you or if they were already known
+          to you! Just click on generate below.
+        </p>
 
-      <h4>Anime Chosen: <span class="anime-name"></span></h4>
-      <p class="fun-fact"></p>
-      <img src="./assets/nintendo-block.jpg" alt="Anime Fact" />
-    </section>
+        <section class="middle-section">
+          <button class="generate-btn" type="button">Generate Fact</button>
 
-    <footer>
-      <ul class="footer-section">
-        <li>
-          <a target="_blank" href="mailto: ke81297@gmail.com">
-            <i class="fa-solid fa-envelope"></i> Email</a
-          >
-        </li>
-        <li>
-          <a target="_blank" href="https://twitter.com/KevinEs812"
-            ><i class="fa-brands fa-twitter"></i> Twitter</a
-          >
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://www.linkedin.com/in/kevinestrada1213/"
-            ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
-          >
-        </li>
-        <li>
-          <a target="_blank" href="https://www.kevin-estrada.com"
-            ><i class="fa-solid fa-globe"></i> Portfolio</a
-          >
-        </li>
-      </ul>
-    </footer>
+          <h2 class="anime-chosen">
+            Anime Chosen: <span class="anime-name"></span>
+          </h2>
+          <p class="fun-fact"></p>
+          <img
+            class="img-placer"
+            src="./assets/nintendo-block.jpg"
+            alt="Anime Fact"
+          />
+        </section>
+      </main>
+
+      <!--Start of the footer section-->
+      <footer>
+        <ul class="footer-section">
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="mailto: ke81297@gmail.com"
+            >
+              <i class="fa-solid fa-envelope"></i> Email</a
+            >
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="https://twitter.com/KevinEs812"
+              ><i class="fa-brands fa-twitter"></i> Twitter</a
+            >
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="https://www.linkedin.com/in/kevinestrada1213/"
+              ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
+            >
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              target="_blank"
+              href="https://www.kevin-estrada.com"
+              ><i class="fa-solid fa-globe"></i> Portfolio</a
+            >
+          </li>
+        </ul>
+      </footer>
+      <!--End of the footer section-->
+    </div>
     <script src="./js/index.js"></script>
+    <script src="./js/navbar.js"></script>
   </body>
 </html>

@@ -1,3 +1,5 @@
+document.querySelector('.generate-btn').addEventListener('click', runFunction);
+
 function runFunction() {
   getAllAnimes('https://anime-facts-rest-api.herokuapp.com/api/v1');
 }
@@ -41,7 +43,7 @@ function getAllAnimes(url) {
       );
 
       document.querySelector('.anime-name').innerText = animeNameCap;
-      document.querySelector('img').src = animeImg;
+      document.querySelector('.img-placer').src = animeImg;
     })
     .catch((err) => {
       console.log(`error: ${err}`);
