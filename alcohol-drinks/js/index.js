@@ -1,126 +1,224 @@
 document.querySelector('.generate-btn').addEventListener('click', runFunction);
 document.querySelector('#drinks').addEventListener('change', runInfoFunction);
 
-// Run Main Functions Here
+let rumArrNames = ['Rum', 'Light rum', 'Spiced rum', 'Dark rum', 'Añejo rum'];
+let ginArrNames = ['Gin', 'Sloe gin'];
+let whiskeyArrNames = [
+  'Whiskey',
+  'Scotch',
+  'Southern Comfort',
+  'Blended whiskey',
+  'Bourbon',
+  'Irish whiskey',
+  'Johnnie Walker',
+];
+let tequilaArrNames = ['Tequila'];
+let vodkaArrNames = ['Vodka', 'Lemon vodka', 'Peach Vodka', 'Absolut Citron'];
+let brandyArrNames = [
+  'Brandy',
+  'Apricot brandy',
+  'Apple brandy',
+  'Cherry brandy',
+  'Coffee brandy',
+  'Cognac',
+  'Blackberry brandy',
+];
+let liqueurArrNames = ['Triple sec', 'Coffee liqueur', 'Kahlua'];
+let drinkObjectsArr = {
+  Rum: rumArrNames,
+  Gin: ginArrNames,
+  Whiskey: whiskeyArrNames,
+  Tequila: tequilaArrNames,
+  Vodka: vodkaArrNames,
+  Brandy: brandyArrNames,
+  Liqueur: liqueurArrNames,
+};
+
+let rumArr = [];
+let ginArr = [];
+let whiskeyArr = [];
+let tequilaArr = [];
+let vodkaArr = [];
+let brandyArr = [];
+let liqueurArr = [];
+
+getAllDrinks(drinkObjectsArr);
+
+async function getAllDrinks(drinkObjectsArr) {
+  for (let x in drinkObjectsArr) {
+    for (let y in drinkObjectsArr[x]) {
+      switch (drinkObjectsArr[x][0]) {
+        case 'Rum':
+          let rumUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let rumDrinks = await fetchAllDrinks(rumUrl);
+          for (item in rumDrinks) {
+            rumArr.push(rumDrinks[item].idDrink);
+          }
+          break;
+        case 'Gin':
+          let ginUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let ginDrinks = await fetchAllDrinks(ginUrl);
+          for (item in ginDrinks) {
+            ginArr.push(ginDrinks[item].idDrink);
+          }
+          break;
+        case 'Whiskey':
+          let whiskeyUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let whiskeyDrinks = await fetchAllDrinks(whiskeyUrl);
+          for (item in whiskeyDrinks) {
+            whiskeyArr.push(whiskeyDrinks[item].idDrink);
+          }
+          break;
+        case 'Tequila':
+          let tequilaUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let tequilaDrinks = await fetchAllDrinks(tequilaUrl);
+          for (item in tequilaDrinks) {
+            tequilaArr.push(tequilaDrinks[item].idDrink);
+          }
+          break;
+        case 'Vodka':
+          let vodkaUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let vodkaDrinks = await fetchAllDrinks(vodkaUrl);
+          for (item in vodkaDrinks) {
+            vodkaArr.push(vodkaDrinks[item].idDrink);
+          }
+          break;
+        case 'Brandy':
+          let brandyUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let brandyDrinks = await fetchAllDrinks(brandyUrl);
+          for (item in brandyDrinks) {
+            brandyArr.push(brandyDrinks[item].idDrink);
+          }
+          break;
+        case 'Triple sec':
+          let liqueurUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
+          let liqueurDrinks = await fetchAllDrinks(liqueurUrl);
+          for (item in liqueurDrinks) {
+            liqueurArr.push(liqueurDrinks[item].idDrink);
+          }
+          break;
+        default:
+      }
+    }
+  }
+}
+
+async function fetchAllDrinks(url) {
+  let res = await fetch(url);
+  let data = await res.json();
+  return data.drinks;
+}
+
 async function runFunction() {
   const drinkChoice = document.getElementById('drinks');
   // This first if is used just for random drinks.
   if (drinkChoice.value == 'random-drink') {
-    getDrinks('https://www.thecocktaildb.com/api/json/v1/1/random.php');
-
-    // This else if statement only pertains to Tequilla since there are no other Tequilla variants, in the case statement
-    // later on it breaks due to an arry being empty, this can be removed when new variations of tequila are found.
-  } else if (drinkChoice.value == 'Tequila') {
-    tequilaHelperFunc(drinkChoice.value);
-
-    // This is used for Liqueur category since there is no actual value of Liqueur in the API,
-    // I call the Drink category function straight and use the values here.
-  } else if (drinkChoice.value == 'Liqueur') {
-    let arrOfDrinks = await getAllDrinkCategories(drinkChoice.value);
-    document.querySelector(
-      '.drink-notice'
-    ).innerText = `This drink category only contains ${arrOfDrinks.length} drinks`;
-    let drinkId = arrOfDrinks[generateRandomNumberFromList(arrOfDrinks.length)];
-    let drinkObj = await fetchDrinkById(
-      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`
+    document.querySelector('.drink-notice').innerText = '';
+    let drinksObj = await fetchDrinkById(
+      'https://www.thecocktaildb.com/api/json/v1/1/random.php'
     );
-    randomDrinkGenerator(drinkObj.drinks[0]);
-
-    // This else statement refers to just using the other selected values as needed.
+    randomDrinkGenerator(drinksObj.drinks[0]);
   } else {
-    getDrinks(
-      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkChoice.value}`,
-      drinkChoice.value
-    );
+    console.log(drinkChoice.value);
+    getDrinks(drinkChoice.value);
   }
-
-  // let url = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178331';
-  // testfetchFunction(url);
 }
 
 function runInfoFunction() {
   setTextForDrink(this.value);
 }
 
-// Helper Functions below here
-
-// Function to help clean up run function that only pertains to Tequilla case until more Tequilla variations are added to the API
-async function tequilaHelperFunc(drinkChoice) {
-  let data = await fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkChoice}`
-  );
-  let drinkObj = await data.json();
-  tempArr = [];
-  for (item in drinkObj.drinks) {
-    tempArr.push(drinkObj.drinks[item].idDrink);
+async function getDrinks(drinkChoice) {
+  switch (drinkChoice) {
+    case 'Rum':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${rumArr.length} drinks`;
+      let rumDrinkId = rumArr[generateRandomNumberFromList(rumArr.length)];
+      let rumDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${rumDrinkId}`
+      );
+      randomDrinkGenerator(rumDrinkObj.drinks[0]);
+      break;
+    case 'Gin':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${ginArr.length} drinks`;
+      let ginDrinkId = ginArr[generateRandomNumberFromList(ginArr.length)];
+      let ginDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ginDrinkId}`
+      );
+      randomDrinkGenerator(ginDrinkObj.drinks[0]);
+      break;
+    case 'Whiskey':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${whiskeyArr.length} drinks`;
+      let whiskeyDrinkId =
+        whiskeyArr[generateRandomNumberFromList(whiskeyArr.length)];
+      let whiskeyDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${whiskeyDrinkId}`
+      );
+      randomDrinkGenerator(whiskeyDrinkObj.drinks[0]);
+      break;
+    case 'Tequila':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${tequilaArr.length} drinks`;
+      let tequilaDrinkId =
+        tequilaArr[generateRandomNumberFromList(tequilaArr.length)];
+      let tequilaDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${tequilaDrinkId}`
+      );
+      randomDrinkGenerator(tequilaDrinkObj.drinks[0]);
+      break;
+    case 'Vodka':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${vodkaArr.length} drinks`;
+      let vodkaDrinkId =
+        vodkaArr[generateRandomNumberFromList(vodkaArr.length)];
+      let vodkaDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${vodkaDrinkId}`
+      );
+      randomDrinkGenerator(vodkaDrinkObj.drinks[0]);
+      break;
+    case 'Brandy':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${brandyArr.length} drinks`;
+      let brandyDrinkId =
+        brandyArr[generateRandomNumberFromList(brandyArr.length)];
+      let brandyDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${brandyDrinkId}`
+      );
+      randomDrinkGenerator(brandyDrinkObj.drinks[0]);
+      break;
+    case 'Liqueur':
+      document.querySelector(
+        '.drink-notice'
+      ).innerText = `This drink category only contains ${liqueurArr.length} drinks`;
+      let liqueurDrinkId =
+        liqueurArr[generateRandomNumberFromList(liqueurArr.length)];
+      let liqueurDrinkObj = await fetchDrinkById(
+        `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${liqueurDrinkId}`
+      );
+      randomDrinkGenerator(liqueurDrinkObj.drinks[0]);
+      break;
+    default:
   }
-
-  document.querySelector(
-    '.drink-notice'
-  ).innerText = `This drink category only contains ${tempArr.length} drinks`;
-
-  let drinkId = tempArr[generateRandomNumberFromList(tempArr.length)];
-  let drinkObjRet = await fetchDrinkById(
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`
-  );
-  console.log(drinkObjRet.drinks[0]);
-  randomDrinkGenerator(drinkObjRet.drinks[0]);
 }
 
-// Function to test api using only fetch, not much helping here only for debugging.
-async function testfetchFunction(url) {
-  let data = await fetch(url);
-  let jsonData = await data.json();
-  console.log(jsonData);
-}
-
-// Function to fetch data from API based on url and then putting it into an array and returning it.
-async function fetchDrinkIdForArray(url) {
-  let data = await fetch(url);
-  let jsonData = await data.json();
-  let temp = [];
-  for (item in jsonData.drinks) {
-    temp.push(jsonData.drinks[item].idDrink);
-  }
-  return temp;
-}
-
-// Function to fetch drink details like name, ingredients, etc... by Id
 async function fetchDrinkById(url) {
   let data = await fetch(url);
   let jsonData = await data.json();
   return jsonData;
 }
 
-// Function for fetching list of drinks
-async function getDrinks(url, alcoholChoice) {
-  let res = await fetch(url);
-  let data = await res.json();
-
-  if (data.drinks.length == 1) {
-    document.querySelector('.drink-notice').innerText = '';
-    let drinksObj = data.drinks[0];
-    randomDrinkGenerator(drinksObj);
-  } else {
-    arrOfDrinks = [];
-    tempArr = [];
-
-    for (item in data.drinks) {
-      tempArr.push(data.drinks[item].idDrink);
-    }
-
-    arrOfDrinks = tempArr.concat(await getAllDrinkCategories(alcoholChoice));
-
-    document.querySelector(
-      '.drink-notice'
-    ).innerText = `This drink category only contains ${arrOfDrinks.length} drinks`;
-    let drinkId = arrOfDrinks[generateRandomNumberFromList(arrOfDrinks.length)];
-    let drinkObj = await fetchDrinkById(
-      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`
-    );
-
-    randomDrinkGenerator(drinkObj.drinks[0]);
-  }
+// Random Number generator for length of data in drinks array.
+function generateRandomNumberFromList(arrLength) {
+  let number = Math.floor(Math.random() * arrLength);
+  return number;
 }
 
 // Function for getting random Drink
@@ -134,112 +232,6 @@ function randomDrinkGenerator(drinksObj) {
   let ingredientClassName = '.drink-ingredients';
 
   createLiForList(drinkInstructMeasure, ingredientClassName);
-}
-
-// Random Number generator for length of data in drinks array.
-function generateRandomNumberFromList(arrLength) {
-  let number = Math.floor(Math.random() * arrLength);
-  return number;
-}
-
-// This gets all the drinks in a category like rum gets rum and light rum and dark rum, etc...
-async function getAllDrinkCategories(alcoholChoice) {
-  switch (alcoholChoice) {
-    case 'Rum':
-      let arrOfRumDrinks = [];
-      let rumArr = ['Light rum', 'Spiced rum', 'Dark rum', 'Añejo rum'];
-      for (let i = 0; i < rumArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${rumArr[i]}`;
-        let rumDrinks = await fetchDrinkIdForArray(url);
-        arrOfRumDrinks = [...arrOfRumDrinks, ...rumDrinks];
-      }
-      return arrOfRumDrinks;
-      break;
-
-    case 'Gin':
-      let arrOfGinDrinks = [];
-      let ginArr = ['Sloe gin'];
-      for (let i = 0; i < ginArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ginArr[i]}`;
-        let ginDrinks = await fetchDrinkIdForArray(url);
-        arrOfGinDrinks = [...arrOfGinDrinks, ...ginDrinks];
-      }
-      return arrOfGinDrinks;
-      break;
-
-    case 'Whiskey':
-      let arrOfWhiskeyDrinks = [];
-      let whiskeyArr = [
-        'Scotch',
-        'Southern Comfort',
-        'Blended whiskey',
-        'Bourbon',
-        'Irish whiskey',
-        'Johnnie Walker',
-      ];
-      for (let i = 0; i < whiskeyArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${whiskeyArr[i]}`;
-        let whiskeyDrinks = await fetchDrinkIdForArray(url);
-        arrOfWhiskeyDrinks = [...arrOfWhiskeyDrinks, ...whiskeyDrinks];
-      }
-      return arrOfWhiskeyDrinks;
-      break;
-
-    case 'Tequila':
-      let arrOfTequilaDrinks = [];
-      let tequilaArr = [];
-      for (let i = 0; i < tequilaArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${tequilaArr[i]}`;
-        let tequilaDrinks = await fetchDrinkIdForArray(url);
-        arrOfTequilaDrinks = [...arrOfTequilaDrinks, ...tequilaDrinks];
-      }
-      return arrOfTequilaDrinks;
-      break;
-
-    case 'Vodka':
-      let arrOfVodkaDrinks = [];
-      let vodkaArr = ['Lemon vodka', 'Peach Vodka', 'Absolut Citron'];
-      for (let i = 0; i < vodkaArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${vodkaArr[i]}`;
-        let vodkaDrinks = await fetchDrinkIdForArray(url);
-        arrOfVodkaDrinks = [...arrOfVodkaDrinks, ...vodkaDrinks];
-      }
-      return arrOfVodkaDrinks;
-      break;
-
-    case 'Brandy':
-      let arrOfBrandyDrinks = [];
-      let brandyArr = [
-        'Apricot brandy',
-        'Apple brandy',
-        'Cherry brandy',
-        'Coffee brandy',
-        'Cognac',
-        'Blackberry brandy',
-      ];
-      for (let i = 0; i < brandyArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${brandyArr[i]}`;
-        let brandyDrinks = await fetchDrinkIdForArray(url);
-        arrOfBrandyDrinks = [...arrOfBrandyDrinks, ...brandyDrinks];
-      }
-      return arrOfBrandyDrinks;
-      break;
-
-    case 'Liqueur':
-      let arrOfLiqueurDrinks = [];
-      let liqueurArr = ['Triple sec', 'Coffee liqueur', 'Kahlua'];
-      for (let i = 0; i < liqueurArr.length; i++) {
-        let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${liqueurArr[i]}`;
-        let liqueurDrinks = await fetchDrinkIdForArray(url);
-        arrOfLiqueurDrinks = [...arrOfLiqueurDrinks, ...liqueurDrinks];
-      }
-      return arrOfLiqueurDrinks;
-      break;
-
-    default:
-      document.querySelector('.description-box').innerText =
-        'This option will return a random drink!';
-  }
 }
 
 // Function for drink case choices
