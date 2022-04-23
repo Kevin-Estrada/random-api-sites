@@ -205,6 +205,32 @@ section {
   margin-bottom: 2%;
   text-align: center;
 }
+
+/*****************START OF SPINNER*****************/
+/* @keyframes spinner {
+  0% {
+    transform: translate3d(-50%, -50%, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+.spin::before {
+  margin-top: 2rem;
+  display: flex;
+  animation: 1.5s linear infinite spinner;
+  animation-play-state: inherit;
+  border: solid 5px #0b57a7;
+  border-bottom-color: #ffffff;
+  border-radius: 50%;
+  content: '';
+  height: 20px;
+  width: 20px;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+} */
+/*****************END OF SPINNER*****************/
+
 /*****************END OF MAIN SECTION*****************/
 
 /*****************START FOOTER SECTION*****************/

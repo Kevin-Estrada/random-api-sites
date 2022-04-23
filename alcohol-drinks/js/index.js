@@ -54,6 +54,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in rumDrinks) {
             rumArr.push(rumDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         case 'Gin':
           let ginUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
@@ -61,6 +65,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in ginDrinks) {
             ginArr.push(ginDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         case 'Whiskey':
           let whiskeyUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
@@ -68,6 +76,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in whiskeyDrinks) {
             whiskeyArr.push(whiskeyDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         case 'Tequila':
           let tequilaUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
@@ -75,6 +87,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in tequilaDrinks) {
             tequilaArr.push(tequilaDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         case 'Vodka':
           let vodkaUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
@@ -82,6 +98,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in vodkaDrinks) {
             vodkaArr.push(vodkaDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         case 'Brandy':
           let brandyUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
@@ -89,6 +109,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in brandyDrinks) {
             brandyArr.push(brandyDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         case 'Triple sec':
           let liqueurUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${drinkObjectsArr[x][y]}`;
@@ -96,6 +120,10 @@ async function getAllDrinks(drinkObjectsArr) {
           for (item in liqueurDrinks) {
             liqueurArr.push(liqueurDrinks[item].idDrink);
           }
+          document
+            .querySelector('option[value="' + x + '"]')
+            .removeAttribute('disabled');
+          document.querySelector('option[value="' + x + '"]').innerText = x;
           break;
         default:
       }
